@@ -16,6 +16,15 @@ DIRNAME="$( dirname "$( readlink -f "$0" )" )"
 TEMAS=$DIRNAME/themes.txt
 
 #Interaccion con el Usuario
+echo -e "Hola necesito saber que sistema operativo usas"
+sleep 1
+echo -e " "
+echo -e " "
+echo -e "~${amarillo}Esta basado en Debian o en Arch ->${fin} ${turquesa}( debian / arch )${fin}"
+read SISTEMA
+echo -e " "
+echo -e " "
+sleep 1
 echo -e "${amarillo}Vamos a proceder a configurar Kitty para ello necesito el nombre del tema que deseas usar.${fin}"
 sleep 2
 echo -e " "
@@ -33,9 +42,14 @@ echo -e "${amarillo}Escribe el nombre exacto del tema que deseas configurar en k
 read TEMA
 
 #Actualizar repositorios e instalar kitty y fish 
-sudo apt update
-sudo apt upgrade -y
-sudo apt install -y git neovim xclip xsel kitty fish python3-pip
+if [[ $SISTEMA == "y" ]]; then
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt install -y git neovim xclip xsel kitty fish python3-pip
+elif [[ $SISTEMA == "n" ]]; then
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S git neovim xclip xsel kitty fish python-pip --noconfirm
+fi
 
 #Establecer fish como shell predeterminada
 chsh -s /usr/bin/fish
