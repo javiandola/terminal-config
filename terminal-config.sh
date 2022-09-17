@@ -12,6 +12,22 @@ fin="\033[0m\e[0m"
 
 #Variables
 USUARIO=${SUDO_USER:-$USER}
+DIRNAME="$( dirname "$( readlink -f "$0" )" )"
+TEMAS=$DIRNAME/themes.txt
+
+#Interaccion con el Usuario
+echo -e "${amarillo}Vamos a proceder a configurar Kitty para ello necesito el nombre del tema que deseas usar.${fin}"
+sleep 2
+echo -e " "
+echo -e " "
+echo -e "${amarillo}¿Deseas ver el listado de temas? -> ${fin}${turquesa}(y/n)${fin}"
+read RESPUESTA
+if [[ $RESPUESTA == "y" ]]; then
+    clear
+    cat $TEMAS
+elif [[ $RESPUESTA == "n" ]]; then
+    clear
+fi
 
 echo -e "${amarillo}Escribe el nombre exacto del tema que deseas configurar en kitty ejemplo ->${fin} ${turquesa}AdventureTime.conf${fin}"
 read TEMA
@@ -31,12 +47,11 @@ echo -e "set -g -x fish_greeting ' '" >> /home/$USUARIO/.config/fish/config.fish
 sudo python3 -m pip install neovim
 sudo python3 -m pip install --upgrade neovim
 mkdir /home/$USUARIO/.config/nvim
-touch /home/$USUARIO/.config/nvim/init.vim
 echo -e "set title" >> /home/$USUARIO/.config/nvim/init.vim
 echo -e "set nu" >> /home/$USUARIO/.config/nvim/init.vim
 
 #Descargar repositorio de kitty-themes
-git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
+git clone --depth 1 https://github.com/dexpota/kitty-themes.git /home/$USUARIO/.config/kitty/kitty-themes
 
 #Enlace simbolico al teme del reposiotrio
 ln -s /home/$USUARIO/.config/kitty/kitty-themes/themes/$TEMA /home/$USUARIO/.config/kitty/theme.conf
