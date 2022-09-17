@@ -52,7 +52,7 @@ elif [[ $SISTEMA == "n" ]]; then
 fi
 
 #Establecer fish como shell predeterminada
-chsh -s /usr/bin/fish
+chsh -s /usr/bin/fish $USUARIO
 
 #Eliminar saludo de fish
 echo -e "set -g -x fish_greeting ' '" >> /home/$USUARIO/.config/fish/config.fish
