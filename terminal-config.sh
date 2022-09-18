@@ -16,11 +16,11 @@ DIRNAME="$( dirname "$( readlink -f "$0" )" )"
 TEMAS=$DIRNAME/themes.txt
 
 #Interaccion con el Usuario
-echo -e "Hola necesito saber que sistema operativo usas"
+echo -e "${amarillo}Hola necesito saber que sistema operativo usas${fin}"
 sleep 1
 echo -e " "
 echo -e " "
-echo -e "~${amarillo}Esta basado en Debian o en Arch ->${fin} ${turquesa}( debian / arch )${fin}"
+echo -e "${amarillo}Esta basado en Debian o en Arch ->${fin} ${turquesa}( debian / arch )${fin}"
 read SISTEMA
 echo -e " "
 echo -e " "
